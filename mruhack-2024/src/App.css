@@ -1,0 +1,25 @@
+:root {
+  --green:hsl(118, 30%, 41%);
+  --beige:#F5F5DC;
+}
+
+nav {
+  background-color: var(--beige);
+  min-height: 5vh;
+  max-height: 5vh;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 1.25rem;
+  border-bottom: 0.5px solid black;
+}
+
+nav .nav-links {
+  color: var(--green);
+  text-decoration: none;
+}
+
+nav .nav-links:hover {
+  --green:hsl(118, 30%, 51%);
+  scale: 110%;
+}
