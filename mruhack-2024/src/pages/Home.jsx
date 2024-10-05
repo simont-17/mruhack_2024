@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+const localizer = momentLocalizer(moment);
 
 export default function Home() {
     const [tasks, setTasks] = useState([]);
     const [taskInput, setTaskInput] = useState('');
     const [taskDate, setTaskDate] = useState('');
     const [prioritySchedule, setPrioritySchedule] = useState([]);
+    const [events, setEvents] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
@@ -34,6 +40,15 @@ export default function Home() {
             setTasks([...tasks, newTask]);
             setTaskInput('');
             setTaskDate('');
+
+            // Add new task to calendar events
+            const newEvent = {
+                title: newTask.description,
+                start: new Date(newTask.date),
+                end: new Date(newTask.date),
+                allDay: true,
+            };
+            setEvents((prevEvents) => [...prevEvents, newEvent]);
         }
     };
 
@@ -67,7 +82,7 @@ export default function Home() {
                 </div>
 
                 <div className="home-right">
-                    <h1>Current tasks</h1>
+                    <h1>Current Tasks</h1>
                     <ul>
                         {tasks.map((task, index) => (
                             <li key={index}>
@@ -77,14 +92,25 @@ export default function Home() {
                     </ul>
                 </div>
             </div>
+
             <div className="schedule-container">
                 <h1>Prioritized Schedule</h1>
-                    <ul>
-                        {prioritySchedule.map((priority, index) => (
-                            <li key={index}>{priority}</li>
-                        ))}
-                    </ul>
+                <ul>
+                    {prioritySchedule.map((priority, index) => (
+                        <li key={index}>{priority}</li>
+                    ))}
+                </ul>
+            </div>
 
+            <div className="calendar-container">
+                <h1>Task Calendar</h1>
+                <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 500 }}
+                />
             </div>
         </div>
     );
