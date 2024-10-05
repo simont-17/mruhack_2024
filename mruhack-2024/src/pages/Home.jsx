@@ -52,7 +52,7 @@ export default function Home() {
                     <ul>
                         {tasks.map((task, index) => (
                             <li key={index}>
-                                {task.description} - <strong>{task.date}</strong> {/* Display task with date */}
+                                {task.description} - <strong>{task.date}</strong>
                             </li>
                         ))}
                     </ul>
