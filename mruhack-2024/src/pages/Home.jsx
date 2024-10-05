@@ -38,7 +38,7 @@ export default function Home() {
     };
 
     return (
-        <>
+        <div className="home-container">
             <div className="card-container">
                 <div className="home-left">
                     <h1>Task Scheduler</h1>
@@ -75,15 +75,17 @@ export default function Home() {
                             </li>
                         ))}
                     </ul>
-
-                    <h1>Prioritized Schedule</h1>
+                </div>
+            </div>
+            <div className="schedule-container">
+                <h1>Prioritized Schedule</h1>
                     <ul>
                         {prioritySchedule.map((priority, index) => (
                             <li key={index}>{priority}</li>
                         ))}
                     </ul>
-                </div>
+
             </div>
-        </>
+        </div>
     );
 }
