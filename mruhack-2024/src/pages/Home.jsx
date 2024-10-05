@@ -6,9 +6,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 
 export default function Home() {
-    const [tasks, setTasks] = useState([]);
-    const [taskInput, setTaskInput] = useState('');
-    const [taskDate, setTaskDate] = useState('');
+    const [assignmentInstructions, setAssignmentInstructions] = useState('');
+    const [groupMemberCount, setGroupMemberCount] = useState(1); // Default to 1 member
+    const [dueDate, setDueDate] = useState('');
     const [prioritySchedule, setPrioritySchedule] = useState([]);
     const [events, setEvents] = useState([]);
 
@@ -20,7 +20,11 @@ export default function Home() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ tasks }), // Send tasks as the body
+                body: JSON.stringify({
+                    instructions: assignmentInstructions,
+                    memberCount: groupMemberCount,
+                    dueDate: dueDate
+                }), // Send the new fields as the body
             });
 
             if (!response.ok) {
@@ -34,72 +38,52 @@ export default function Home() {
         }
     };
 
-    const addTask = () => {
-        if (taskInput.trim() && taskDate) {
-            const newTask = { description: taskInput, date: taskDate };
-            setTasks([...tasks, newTask]);
-            setTaskInput('');
-            setTaskDate('');
-
-            // Add new task to calendar events
-            const newEvent = {
-                title: newTask.description,
-                start: new Date(newTask.date),
-                end: new Date(newTask.date),
-                allDay: true,
-            };
-            setEvents((prevEvents) => [...prevEvents, newEvent]);
-        }
-    };
-
     return (
         <div className="home-container">
             <div className="card-container">
                 <div className="home-left">
-                    <h1>Task Scheduler</h1>
+                    <h1>Assignment Scheduler</h1>
                     <div className="form-container">
-                        <form onSubmit={handleSubmit} id="task_form">
+                        <form onSubmit={handleSubmit} id="assignment_form">
                             <textarea
-                                name="user_input"
-                                placeholder="Enter task here..."
-                                value={taskInput}
-                                onChange={(e) => setTaskInput(e.target.value)}
+                                name="assignment_instructions"
+                                placeholder="Enter assignment instructions here..."
+                                value={assignmentInstructions}
+                                onChange={(e) => setAssignmentInstructions(e.target.value)}
                                 required
                             ></textarea>
-                            <label htmlFor="task-deadline">Enter task deadline</label>
+                            <label htmlFor="group-member-count">Group Member Count</label>
                             <input
-                                type="date"
-                                name="task-deadline"
-                                id="task-deadline"
-                                value={taskDate}
-                                onChange={(e) => setTaskDate(e.target.value)}
+                                type="number"
+                                name="group-member-count"
+                                id="group-member-count"
+                                min="1"
+                                value={groupMemberCount}
+                                onChange={(e) => setGroupMemberCount(e.target.value)}
                                 required
                             />
-                            <button type="button" onClick={addTask}>Add task</button>
-                            <button type="submit" form="task_form">Generate schedule</button>
+                            <label htmlFor="due-date">Enter Project Deadline</label>
+                            <input
+                                type="date"
+                                name="due-date"
+                                id="due-date"
+                                value={dueDate}
+                                onChange={(e) => setDueDate(e.target.value)}
+                                required
+                            />
+                            <button type="submit" form="assignment_form">Generate Schedule</button>
                         </form>
                     </div>
                 </div>
 
                 <div className="home-right">
-                    <h1>Current Tasks</h1>
+                    <h1>Prioritized Schedule</h1>
                     <ul>
-                        {tasks.map((task, index) => (
-                            <li key={index}>
-                                {task.description} - <strong>{task.date}</strong>
-                            </li>
+                        {prioritySchedule.map((priority, index) => (
+                            <li key={index}>{priority}</li>
                         ))}
                     </ul>
                 </div>
-            </div>
-
-            <div className="schedule-container">
-                <h1>Prioritized Schedule</h1>
-                <ul>
-                    {prioritySchedule.map((priority, index) => (
-                        <li key={index}>{priority}</li>
-                    ))}
-                </ul>
             </div>
 
             <div className="calendar-container">
