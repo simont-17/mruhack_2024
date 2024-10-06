@@ -9,6 +9,7 @@ body, root {
     margin: 0;
     padding: 0;
     font-family: Poppins, Arial, Helvetica, sans-serif;
+    background-color:rgb(238, 213, 213);
 }
 
 nav {
@@ -29,6 +30,7 @@ nav {
 nav .nav-links {
   color: white;
   text-decoration: none;
+  margin-right: 10px;
   
 }
 
@@ -45,6 +47,12 @@ nav svg:hover, nav a:hover {
 nav .nav-links:hover {
   scale: 110%;
 }
+.gitHubLogo
+{
+  width:70px; 
+  height:70px;
+  margin-right: 75px;
+}
 
 nav .link-container {
   display: flex;
@@ -60,7 +68,14 @@ nav .link-container {
   align-items: flex-start;
   margin: 75px;
   padding: 75px;
+  border-radius: 8px;
 
+}
+.card-container h1
+{
+  background-color:rgb(238, 213, 213);
+  padding: 20px;
+  border-radius: 4px;
 }
 
 .form-container {
@@ -80,7 +95,15 @@ textarea {
 }
 .calendar-container
 {
-  padding: 75px;
+  padding: 20px;
+  margin: 55px;
+  border-radius: 8px;
+  background-color: #FFF2F2;
+}
+/* Priority List */
+.home-right h1
+{
+  padding-left: 10px;
 }
 /* For form inputs */
 .asg_instructs
@@ -88,7 +111,7 @@ textarea {
   font-size: 16px;
   border-radius: 4px;
   border: 1px var(--green);
-  width: 1000px;
+  width: 500px;
   resize:auto;
   height:300px;
   overflow: auto;
@@ -121,6 +144,15 @@ input, button
 button
 {
   font-size: 16px;
+}
+@media screen and (min-width:2500px) {
+  .asg_instructs
+  {
+    width: 1000px;
+    resize:auto;
+    height:300px;
+
+  }
 }
 
 button:hover {
