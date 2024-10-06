@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { saveAs } from 'file-saver'; // Import for saving files
-import { createEvents } from 'ics'; // Import for creating multiple events
+import { saveAs } from 'file-saver';
+import { createEvents } from 'ics';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
@@ -42,16 +42,20 @@ export default function Home() {
 
             setPrioritySchedule(sortedTasks); // Update state with sorted tasks
 
-            // Modify the events to appear on a single day
+            // Modify the events to appear on the start date
             const newEvents = sortedTasks.map((task) => {
-                // Choose either the due date or start date
-                const taskDate = moment(task.dueDate, 'YYYY-MM-DD'); // Use due date
-                // const taskDate = moment(task.startDate, 'YYYY-MM-DD'); // Use start date
+                // Parse the start date in local time and set time to noon
+                const taskDate = moment(task.startDate, 'YYYY-MM-DD').set({
+                    hour: 12,
+                    minute: 0,
+                    second: 0,
+                    millisecond: 0,
+                });
 
                 return {
                     title: task.task,
                     start: taskDate.toDate(),
-                    end: taskDate.toDate(), // Same as start date
+                    end: taskDate.toDate(),
                     allDay: true,
                 };
             });
@@ -65,12 +69,27 @@ export default function Home() {
     // Function to generate and download the .ics file with all events
     const handleExportICS = () => {
         const eventsForICS = prioritySchedule.map((task) => {
-            const taskDate = moment(task.dueDate, 'YYYY-MM-DD').toDate();
+            // Parse the start date in local time and set time to noon
+            const taskDate = moment(task.startDate, 'YYYY-MM-DD').set({
+                hour: 12,
+                minute: 0,
+                second: 0,
+                millisecond: 0,
+            });
+
+            const startDateComponents = [
+                taskDate.year(),
+                taskDate.month() + 1, // Months are zero-indexed in moment.js
+                taskDate.date(),
+                taskDate.hour(),
+                taskDate.minute(),
+            ];
+
             return {
-                start: [taskDate.getFullYear(), taskDate.getMonth() + 1, taskDate.getDate()],
+                start: startDateComponents,
                 title: task.task,
                 description: `Task: ${task.task}`,
-                duration: { hours: 1 }, // Assuming a 1-hour duration for each task
+                duration: { hours: 1 },
             };
         });
 
