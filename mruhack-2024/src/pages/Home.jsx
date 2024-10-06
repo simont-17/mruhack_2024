@@ -79,9 +79,11 @@ export default function Home() {
                 <div className="home-right">
                     <h1>Prioritized Schedule</h1>
                     <ul>
-                        {prioritySchedule.map((priority, index) => (
-                            <li key={index}>{priority}</li>
-                        ))}
+                    {prioritySchedule.map((priority, index) => (
+            <li key={index}>
+                {priority.task} - Due: {priority.dueDate}
+            </li>
+        ))}
                     </ul>
                 </div>
             </div>
