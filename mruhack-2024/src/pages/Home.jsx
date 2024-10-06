@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { saveAs } from 'file-saver'; // Correct import
+import { createEvents } from 'ics'; // Correct import for creating multiple events
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
@@ -23,8 +25,8 @@ export default function Home() {
                 body: JSON.stringify({
                     instructions: assignmentInstructions,
                     memberCount: groupMemberCount,
-                    dueDate: dueDate
-                }), // Send the new fields as the body
+                    dueDate: dueDate,
+                }),
             });
 
             if (!response.ok) {
@@ -32,7 +34,7 @@ export default function Home() {
             }
 
             const data = await response.json();
-            setPrioritySchedule(data.prioritizedTasks); // Update state with prioritized tasks
+            setPrioritySchedule(data.prioritizedTasks);
 
             // Transform prioritizedTasks into events for the calendar
             const newEvents = data.prioritizedTasks.map((task) => {
@@ -45,10 +47,34 @@ export default function Home() {
                 };
             });
 
-            setEvents(newEvents); // Update the events state
+            setEvents(newEvents);
         } catch (error) {
             console.error('Error fetching data from backend:', error);
         }
+    };
+
+    // Function to generate and download the .ics file with all events
+    const handleExportICS = () => {
+        const eventsForICS = prioritySchedule.map((task) => {
+            const taskDate = moment(task.dueDate, 'YYYY-MM-DD').toDate();
+            return {
+                start: [taskDate.getFullYear(), taskDate.getMonth() + 1, taskDate.getDate()],
+                title: task.task,
+                description: `Task: ${task.task}`,
+                duration: { hours: 1 }, // Assuming a 1-hour duration for each task
+            };
+        });
+
+        createEvents(eventsForICS, (error, value) => {
+            if (error) {
+                console.error('Error creating events:', error);
+                return;
+            }
+
+            // Create a Blob and use file-saver to download the combined .ics file
+            const blob = new Blob([value], { type: 'text/calendar;charset=utf-8' });
+            saveAs(blob, 'Schedule.ics');
+        });
     };
 
     return (
@@ -110,7 +136,9 @@ export default function Home() {
                     endAccessor="end"
                     style={{ height: 500 }}
                 />
+                <button onClick={handleExportICS}>Export to .ics</button>
             </div>
         </div>
     );
 }
+
