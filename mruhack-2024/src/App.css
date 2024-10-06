@@ -8,6 +8,7 @@
 body, root {
     margin: 0;
     padding: 0;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
 }
 
 nav {
@@ -19,19 +20,26 @@ nav {
   align-items: center;
   font-size: 2rem;
   box-shadow: 10px 1px 10px rgb(237, 237, 237);
-  padding-left: 30px;
+  padding: 30px 0px;
   z-index: 2;
-
+  padding-left: 75px;
+  justify-content: space-between;
 }
 
 nav .nav-links {
   color: white;
   text-decoration: none;
+  
 }
 
 nav .nav-links:hover {
   --green:hsl(118, 30%, 51%);
   scale: 110%;
+}
+
+.link-container {
+  display: flex;
+  
 }
 
 .card-container {
@@ -40,6 +48,8 @@ nav .nav-links:hover {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-start;
+  margin: 75px;
+  padding: 75px;
 
 }
 
@@ -51,11 +61,56 @@ nav .nav-links:hover {
 form {
   display: flex;
   flex-direction: column;
+  row-gap: 10px;
 }
 
 textarea {
   width: 100%;
   resize: none;
+}
+.calendar-container
+{
+  padding: 75px;
+}
+/* For form inputs */
+.asg_instructs
+{
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px var(--green);
+  width: 1000px;
+  resize:auto;
+  height:300px;
+  overflow: auto;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  background: rgb(251, 251, 251);
+  transition: all 0.1s ease 0s;
+
+}
+label
+{
+  font-size: 18px;
+  font-family: Poppins,Arial, Helvetica, sans-serif;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  background: rgb(251, 251, 251);
+  transition: all 0.1s ease 0s;
+  border-radius: 4px;
+ 
+}
+input, button
+{
+  border: 1px var(--green);
+  border-radius: 4px;
+  padding: 8px;
+  font-family: Poppins,Arial, Helvetica, sans-serif;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  background: rgb(251, 251, 251);
+  transition: all 0.1s ease 0s;
+  
+}
+button
+{
+  font-size: 16px;
 }
 
 

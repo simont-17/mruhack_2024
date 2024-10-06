@@ -113,6 +113,7 @@ export default function Home() {
                     <div className="form-container">
                         <form onSubmit={handleSubmit} id="assignment_form">
                             <textarea
+                                className= "asg_instructs"
                                 name="assignment_instructions"
                                 placeholder="Enter assignment instructions here..."
                                 value={assignmentInstructions}
