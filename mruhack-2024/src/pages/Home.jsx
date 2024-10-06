@@ -33,6 +33,19 @@ export default function Home() {
 
             const data = await response.json();
             setPrioritySchedule(data.prioritizedTasks); // Update state with prioritized tasks
+
+            // Transform prioritizedTasks into events for the calendar
+            const newEvents = data.prioritizedTasks.map((task) => {
+                const taskDate = moment(task.dueDate, 'YYYY-MM-DD');
+                return {
+                    title: task.task,
+                    start: taskDate.toDate(),
+                    end: taskDate.toDate(),
+                    allDay: true,
+                };
+            });
+
+            setEvents(newEvents); // Update the events state
         } catch (error) {
             console.error('Error fetching data from backend:', error);
         }
@@ -79,11 +92,11 @@ export default function Home() {
                 <div className="home-right">
                     <h1>Prioritized Schedule</h1>
                     <ul>
-                    {prioritySchedule.map((priority, index) => (
-            <li key={index}>
-                {priority.task} - Due: {priority.dueDate}
-            </li>
-        ))}
+                        {prioritySchedule.map((priority, index) => (
+                            <li key={index}>
+                                {priority.task} - Due: {priority.dueDate}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
