@@ -145,6 +145,35 @@ button
     height:300px;
 
   }
+}@media screen and (max-width:1135px) {
+  .asg_instructs
+  {
+    width: auto;
+    height: auto;
+   
+  }
+  .card-container
+  {
+    min-width:550px;
+    background-size:45% ;
+    min-width: 600px;
+    background-size: 45%;
+    padding: 50px;
+    margin: 50px;
+  }
+  ul
+  {
+    font-size: 12px;
+  }
+  .calendar-container
+  {
+    min-width: 650px;
+  }
+  nav
+  {
+    width: 100%;
+  }
+
 }
 
 button:hover {
