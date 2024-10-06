@@ -127,3 +127,14 @@ button:hover {
   cursor: pointer;
   background: hsl(0, 0%, 88%);
 }
+
+.calendar-container .rbc-today {
+  background-color: var(--pink);
+}
+.rbc-active {
+  background-color: var(--pink);
+}
+
+.rbc-toolbar button:active, .rbc-toolbar button.rbc-active {
+  background-color: var(--pink) !important;
+}
