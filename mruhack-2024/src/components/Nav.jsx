@@ -8,7 +8,7 @@ export default function Nav() {
              <Link to="/about" className="nav-links">About</Link>
             </div>
             <div>
-                <h1>Projectivity</h1>
+                <h1 className = "title">Projectivity</h1>
             </div>
 
             <a href="https://github.com/simont-17/mruhack_2024" target="_blank">

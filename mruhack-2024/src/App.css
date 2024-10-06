@@ -34,10 +34,12 @@ nav .nav-links {
   
 }
 
-
+svg {
+  fill: white;
+}
 
 nav svg:hover, nav a:hover {
-  fill: white;
+  fill: black;
   cursor: pointer;
 }
 
@@ -56,6 +58,11 @@ nav .link-container {
   display: flex;
   gap: 30px;
   
+}
+.title
+{
+  margin-right: 200px;
+  color: white;
 }
 
 .card-container {
@@ -96,7 +103,6 @@ textarea {
   background-color: #FFF2F2;
 }
 /* Priority List */
-
 /* For form inputs */
 .asg_instructs
 {
@@ -173,6 +179,10 @@ button
   {
     width: 100%;
   }
+  .title
+  {
+    margin-right: 0px;
+  }
 
 }
 
@@ -243,4 +253,10 @@ button:hover {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  padding: 25px;
+  font-size: 20px;
+}
+.mission-section  h1
+{
+  font-size: 30px;
 }

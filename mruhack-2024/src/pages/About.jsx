@@ -3,8 +3,8 @@ export default function About() {
         <div className="about-container">
             <section className="mission-section">
                 <h1>Our Mission</h1>
-                <p>Have you ever procastinated a project just because the size seemed too daunting and you just don't know how to even start? With Projectvitiy, you can enter your assignemnt instructions and have a fully automated generation of a breakdown of steps, including when to start and when you should have it dne by.</p>
-                <p>According to American Psychological Association (APA), 80 to 95% of university students procastinate. To challenge this statistic, we built Projectivity with university students mind and what kind of struggles we anecotcally go through.</p>
+                <p>At Projectivity, we aim to make daunting projects manageable. Have you ever delayed starting a task because it felt overwhelming or you weren't sure where to begin? With Projectivity, you simply enter your assignment instructions, and our tool generates a step-by-step breakdown of tasks, complete with deadlines for each. By helping you start early and plan ahead, we guide you through the project, ensuring you're on track to finish on time.</p>
+                <p>According to the American Psychological Association (APA), between 80-95% of university students procrastinate. Our mission is to challenge this statistic by addressing the specific struggles that university students face, based on our own experiences, and providing a practical solution that fits into their daily academic lives.</p>
             </section>
             <section className="team-section">
                 <h1>Our Team</h1>
