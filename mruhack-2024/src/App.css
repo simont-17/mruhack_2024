@@ -11,18 +11,21 @@ body, root {
 }
 
 nav {
-  background-color: var(--cream);
+  background-color: hsl(0, 100%, 87%);
   min-height: 5vh;
   max-height: 5vh;
   display: flex;
   gap: 20px;
   align-items: center;
-  font-size: 1.25rem;
-  border-bottom: 0.5px solid black;
+  font-size: 2rem;
+  box-shadow: 10px 1px 10px rgb(237, 237, 237);
+  padding-left: 30px;
+  z-index: 2;
+
 }
 
 nav .nav-links {
-  color: var(--beige);
+  color: white;
   text-decoration: none;
 }
 
@@ -32,6 +35,7 @@ nav .nav-links:hover {
 }
 
 .card-container {
+    background-color: var(--cream);
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -50,6 +54,8 @@ form {
 }
 
 textarea {
+  width: 100%;
   resize: none;
 }
+
 
