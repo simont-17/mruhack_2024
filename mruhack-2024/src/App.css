@@ -36,7 +36,7 @@ nav svg {
   padding-right: 30px;
 }
 
-nav svg:hover {
+nav svg:hover, nav a:hover {
   fill: white;
   cursor: pointer;
 }
