@@ -1,11 +1,17 @@
 :root {
-  --green:hsl(118, 30%, 41%);
-  --beige:#F5F5DC;
+  --pink: #FFCCD9;
+  --beige: #CCADAD;
+  --cream: #FFF2F2;
 
 }
 
+body, root {
+    margin: 0;
+    padding: 0;
+}
+
 nav {
-  background-color: var(--beige);
+  background-color: var(--cream);
   min-height: 5vh;
   max-height: 5vh;
   display: flex;
@@ -16,7 +22,7 @@ nav {
 }
 
 nav .nav-links {
-  color: var(--green);
+  color: var(--beige);
   text-decoration: none;
 }
 
@@ -30,7 +36,7 @@ nav .nav-links:hover {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-start;
-  border: 1px solid black;
+
 }
 
 .form-container {
@@ -46,3 +52,4 @@ form {
 textarea {
   resize: none;
 }
+
