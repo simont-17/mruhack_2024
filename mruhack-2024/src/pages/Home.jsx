@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { saveAs } from 'file-saver'; // Correct import
-import { createEvents } from 'ics'; // Correct import for creating multiple events
+import { saveAs } from 'file-saver'; // Import for saving files
+import { createEvents } from 'ics'; // Import for creating multiple events
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
@@ -34,20 +34,29 @@ export default function Home() {
             }
 
             const data = await response.json();
-            setPrioritySchedule(data.prioritizedTasks);
 
-            // Transform prioritizedTasks into events for the calendar
-            const newEvents = data.prioritizedTasks.map((task) => {
-                const taskDate = moment(task.dueDate, 'YYYY-MM-DD');
+            // Sort the tasks by start date
+            const sortedTasks = [...data.prioritizedTasks].sort((a, b) => {
+                return new Date(a.startDate) - new Date(b.startDate);
+            });
+
+            setPrioritySchedule(sortedTasks); // Update state with sorted tasks
+
+            // Modify the events to appear on a single day
+            const newEvents = sortedTasks.map((task) => {
+                // Choose either the due date or start date
+                const taskDate = moment(task.dueDate, 'YYYY-MM-DD'); // Use due date
+                // const taskDate = moment(task.startDate, 'YYYY-MM-DD'); // Use start date
+
                 return {
                     title: task.task,
                     start: taskDate.toDate(),
-                    end: taskDate.toDate(),
+                    end: taskDate.toDate(), // Same as start date
                     allDay: true,
                 };
             });
 
-            setEvents(newEvents);
+            setEvents(newEvents); // Update the events state
         } catch (error) {
             console.error('Error fetching data from backend:', error);
         }
@@ -110,7 +119,9 @@ export default function Home() {
                                 onChange={(e) => setDueDate(e.target.value)}
                                 required
                             />
-                            <button type="submit" form="assignment_form">Generate Schedule</button>
+                            <button type="submit" form="assignment_form">
+                                Generate Schedule
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -120,7 +131,7 @@ export default function Home() {
                     <ul>
                         {prioritySchedule.map((priority, index) => (
                             <li key={index}>
-                                {priority.task} - Due: {priority.dueDate}
+                                {priority.task} - Start: {priority.startDate} - Due: {priority.dueDate}
                             </li>
                         ))}
                     </ul>
@@ -141,4 +152,3 @@ export default function Home() {
         </div>
     );
 }
-
