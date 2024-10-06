@@ -32,13 +32,23 @@ nav .nav-links {
   
 }
 
+nav svg {
+  padding-right: 30px;
+}
+
+nav svg:hover {
+  fill: white;
+  cursor: pointer;
+}
+
+
 nav .nav-links:hover {
-  --green:hsl(118, 30%, 51%);
   scale: 110%;
 }
 
-.link-container {
+nav .link-container {
   display: flex;
+  gap: 30px;
   
 }
 
