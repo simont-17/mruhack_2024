@@ -260,3 +260,8 @@ button:hover {
 {
   font-size: 30px;
 }
+
+.task-list > li:first-of-type {
+  font-weight: bold;
+  list-style: none;
+}

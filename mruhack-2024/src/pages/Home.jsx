@@ -148,7 +148,7 @@ export default function Home() {
 
                 <div className="home-right">
                     <h1>Prioritized Schedule</h1>
-                    <ul>
+                    <ul className="task-list">
                         {prioritySchedule.map((priority, index) => (
                             <li key={index}>
                                 {priority.task} - Start: {priority.startDate} - Due: {priority.dueDate}
